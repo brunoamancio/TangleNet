@@ -1,0 +1,15 @@
+---- Using the converter
+var Hash = iri.model.Hash;
+var Converter = iri.utils.Converter; 
+Usage: 
+var bundleHash = new Hash("CWYSLZWQEJHKAN9EYNGQBF9ZHNCVCTOZWUHFKCOEZNLYW9YSIKG9ZEULZKEIJHW9FBPQCCRWHYGCVEEOX");
+var bundleHashTrits = bundleHash.trits();
+Converter.trytes(bundleHashTrits) // returns CWYSLZWQEJHKAN9EYNGQBF9ZHNCVCTOZWUHFKCOEZNLYW9YSIKG9ZEULZKEIJHW9FBPQCCRWHYGCVEEOX
+
+---- Using a BundleViewModel
+var Hash = iri.model.Hash;
+var BundleViewModel = iri.controllers.BundleViewModel;
+
+var bundleHash = new Hash("CWYSLZWQEJHKAN9EYNGQBF9ZHNCVCTOZWUHFKCOEZNLYW9YSIKG9ZEULZKEIJHW9FBPQCCRWHYGCVEEOX");
+var bundleViewModel = new BundleViewModel(bundleHash);
+bundleViewModel.getIndex() // return the Hash object (like bundleHash)
