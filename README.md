@@ -3,7 +3,7 @@ IOTA IXI Module to read web content from the Tangle
 
 ## Setup
 
-Setup a local full node and run it
+Setup a local fullnode and run it
 ```
 https://github.com/iotaledger/iri
 ```
@@ -12,15 +12,15 @@ Download the actual database
 ```
 http://db.iota.partners/IOTA.partners-mainnetdb.tar.gz
 ```
-This is a service, which provides you always the actual database. You don’t need a synced iri with neighbors, just download the database again.
+This is a service which provides you the actual database. You don’t need a synced IRI with neighbors, just download the database again.
 
-Clone this repo in your ixi directory ( iri/target/ixi )
+Clone this repo in your IXI directory ( iri/target/ixi )
 ```
 git clone https://github.com/brunoamancio/TangleNet
 ```
-That's it. The iri should load the ixi module automaticly.
+That's it. The IRI should load the IXI module automatically.
 
-You should see this in the iri log
+You should see this in the IRI log
 ```
 [main] INFO  com.iota.iri.IXI - Searching: ixi/TangleNet
 [main] INFO  com.iota.iri.IXI - Loading module: TangleNet
