@@ -9,34 +9,42 @@ var Transaction = iri.controllers.TransactionViewModel;
 var Converter = iri.utils.Converter;
 
 function viewImplementation(request) {
+    var transactionHashString = request.get("tail");
+    if(!transactionHashString){
+        return Response.create(getEmptyContent());
+    }
 
-    var transactionHash = new Hash("BUUFWGXQYVHQNEDRHWLMRYWWKRGIJ9FDGQL9AA9XNSKYYPHJDIRBMJNQNGNUJXHMB9UYSQCDDJEJA9999");
-    var transactionList = BundleValidator.validate(IOTA.tangle, transactionHash);
+    var transactionHash = new Hash(transactionHashString);
+    var transactionListParent = BundleValidator.validate(IOTA.tangle, transactionHash);
+    var trytes = "";
+    
+    print("hash: " + transactionHash.toString());
+    for (var i = 0; i < transactionListParent.size(); i++) {
+        print("aa1");
+        var transactionList = transactionListParent[i];
+        print("aa2");
+        for (var j = 0; j < transactionList.size(); j++) {
+            var partialTrytes = Converter.trytes(transactionList[j].getSignature());
+            print("signature :" + partialTrytes);
+            trytes += partialTrytes;
+        }
+    }
+    print("size: " + transactionListParent.size());
+    print("trytes: " + trytes);
 
-    var firstTransaction = transactionList[0];
-
-    print("firstTransaction",firstTransaction);
-    print("firstTransaction[0]",firstTransaction[0]);
-
-    //var message = firstTransaction.stream().map(function (tx) { return Converter.trytes(tx.getSignature())}).toArray()
-
-    var trytes = Converter.trytes(firstTransaction[0].getSignature());
-    var html_content = fromTrytes(trytes);
-
-    var response = { content_type: "text/html",
-                     content: html_content };
-
+    var response = trytes ? { contentType : "text/html",
+                              content: fromTrytes(trytes)
+                            }
+                          : getEmptyContent();
     return Response.create(response);
 }
 
-//
-//  Trytes to bytes
-//  2 Trytes == 1 Byte
-//  We assume that the trytes are a JSON encoded object thus for our encoding:
-//    First character = {
-//    Last character = }
-//    Everything after that is 9's padding
-//
+function getEmptyContent(){
+    return { contentType: "text/html",
+             content : "<!DOCTYPE html><html><header><title>TangleNet - No content found</title></header><body><div><b>No content</b> - Tail hasn't been defined or found.</div></body></html>"
+    };
+}
+
 function fromTrytes(inputTrytes) {
 
     // If input is not a string, return null
