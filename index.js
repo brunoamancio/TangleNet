@@ -17,20 +17,13 @@ function viewImplementation(request) {
     var transactionHash = new Hash(transactionHashString);
     var transactionListParent = BundleValidator.validate(IOTA.tangle, transactionHash);
     var trytes = "";
-    
-    print("hash: " + transactionHash.toString());
+
     for (var i = 0; i < transactionListParent.size(); i++) {
-        print("aa1");
         var transactionList = transactionListParent[i];
-        print("aa2");
         for (var j = 0; j < transactionList.size(); j++) {
-            var partialTrytes = Converter.trytes(transactionList[j].getSignature());
-            print("signature :" + partialTrytes);
-            trytes += partialTrytes;
+            trytes += Converter.trytes(transactionList[j].getSignature());
         }
     }
-    print("size: " + transactionListParent.size());
-    print("trytes: " + trytes);
 
     var response = trytes ? { contentType : "text/html",
                               content: fromTrytes(trytes)
