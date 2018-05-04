@@ -8,13 +8,13 @@ Setup a local fullnode and run it
 https://github.com/iotaledger/iri
 ```
 
-Download the actual database
+Sync the vanilla way or download the database
 ```
 http://db.iota.partners/IOTA.partners-mainnetdb.tar.gz
 ```
-This is a service which provides you the actual database. You don’t need a synced IRI with neighbors, just download the database again.
+For testing purposes only: if you download the database you don’t need to keep synced, as long as your test transactions are available in the database you have downloaded.
 
-Clone this repo in your IXI directory ( iri/target/ixi )
+Clone this repo in your IXI directory (/ixi which, per default, is in the same folder as your iri-*.jar)
 ```
 git clone https://github.com/brunoamancio/TangleNet
 ```
@@ -29,16 +29,22 @@ TangleNet extension started...
 ```
 
 ## How to use
-Use curl:
+Option 1 - Use curl:
 ```
-curl http://localhost:14265/ -X POST -H "Content-Type: application/json" -H "X-IOTA-API-Version: 1" -d "{'command': 'TangleNet.view'}"
+curl http://localhost:14265/ -X POST -H "Content-Type: application/json" -H "X-IOTA-API-Version: 1" -d "{'command': 'TangleNet.view', 'tail' : ''}"
 ```
+Option 2 - Use your browser:
+http://localhost:14265/?command=TangleNet.view&tail=
+
+The tail parameter is the transaction with index 0 in the bundle with the web content.
 
 ## Examples
 
-Hello World BundleHash:
+Hello World transaction:
 ```
-CWYSLZWQEJHKAN9EYNGQBF9ZHNCVCTOZWUHFKCOEZNLYW9YSIKG9ZEULZKEIJHW9FBPQCCRWHYGCVEEOX
+BUUFWGXQYVHQNEDRHWLMRYWWKRGIJ9FDGQL9AA9XNSKYYPHJDIRBMJNQNGNUJXHMB9UYSQCDDJEJA9999
 ```
 Preview:
-https://thetangle.org/bundle/CWYSLZWQEJHKAN9EYNGQBF9ZHNCVCTOZWUHFKCOEZNLYW9YSIKG9ZEULZKEIJHW9FBPQCCRWHYGCVEEOX
+https://thetangle.org/transaction/BUUFWGXQYVHQNEDRHWLMRYWWKRGIJ9FDGQL9AA9XNSKYYPHJDIRBMJNQNGNUJXHMB9UYSQCDDJEJA9999
+
+This transaction will NOT work after a snapshot, since transactions are removed. You must send your own transaction to the tangle and consume it.
