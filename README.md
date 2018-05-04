@@ -36,7 +36,7 @@ curl http://localhost:14265/ -X POST -H "Content-Type: application/json" -H "X-I
 Option 2 - Use your browser:
 http://localhost:14265/?command=TangleNet.view&tail=
 
-The tail parameter is the transaction with index 0 in the bundle with the web content.
+The tail parameter is the hash of the transaction with index 0 in the bundle with the web content.
 
 ## Examples
 
