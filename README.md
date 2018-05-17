@@ -1,6 +1,8 @@
 # TangleNet
 IOTA IXI Module to read web content from the Tangle
 
+TangleNet on IOTA Ecosystem: https://ecosystem.iota.org/projects/tanglenet
+
 ## Setup
 
 Setup a local fullnode and run it
