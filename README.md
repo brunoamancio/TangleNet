@@ -7,6 +7,10 @@ Setup a local fullnode and run it
 ```
 https://github.com/iotaledger/iri
 ```
+PS.: A few changes required on IRI are on their way. For now you need to use my iri branch
+```
+https://github.com/brunoamancio/iri
+```
 
 Sync the vanilla way or download the database
 ```
